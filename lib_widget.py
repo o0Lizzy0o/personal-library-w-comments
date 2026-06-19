@@ -17,8 +17,11 @@ conn.close()
 root = Tk()
 root.title('test name')
 root.geometry('700x450')
+input1=StringVar()
+
 
 class My_widget(Frame):
+
      def __init__(self, parent, label_text, button_text):
           super().__init__(master = parent)
 
@@ -27,9 +30,16 @@ class My_widget(Frame):
           self.columnconfigure((0,1),weight=1, uniform='z')
 
           #buttons
-          Label(self,text=label_text).grid(row=0,column=0)
-          Button(self, text=button_text).grid(row=0, column=1)
+          self.label = Label(self, text=label_text)
+          self.label.grid(row=0, column=0)
+          Button(self, text=button_text,command=self.input).grid(row=0, column=1)
+          #inputbox example
+          Entry(self,textvariable=input1).grid(row=0, column=2)
           self.pack()
+
+     def input(self) :
+          entryInput = input1.get()
+          self.label.config(text=entryInput)
 
 My_widget(root,"Label 1","Button 1")
 
